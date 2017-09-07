@@ -89,13 +89,40 @@ class MicrocontroladorApiController extends Controller
 
     public function storeGet($nombre, $temperatura, $monoxido, $radiacion, $latitud, $longitud)
     {
+        // cambiar horrible apuro
+        $uv = 0;
+        if ($radiacion < 227) {
+            $uv = 1;
+        }else if ($radiacion < 318 && $radiacion >=227) {
+            $uv = 2;
+        }else if ($radiacion < 408 && $radiacion >=318) {
+            $uv = 3;
+        }else if ($radiacion < 503 && $radiacion >=408) {
+            $uv = 4;
+        }else if ($radiacion < 606 && $radiacion >=503) {
+            $uv = 5;
+        }else if ($radiacion < 696 && $radiacion >=606) {
+            $uv = 6;
+        }else if ($radiacion < 795 && $radiacion >=696) {
+            $uv = 7;
+        }else if ($radiacion < 881 && $radiacion >=795) {
+            $uv = 8;
+        }else if ($radiacion < 976 && $radiacion >=881) {
+            $uv = 9;
+        }else if ($radiacion < 1079 && $radiacion >=976) {
+            $uv = 10;
+        } 
+        else {
+            $uv = 11;
+        }
+        
 
         try{
             $micontrolador = new Microcontrolador([
                 'nombre'        => $nombre,
                 'temperatura'   => $temperatura,
                 'monoxido'      => $monoxido,
-                'radiacion'     => $radiacion,
+                'radiacion'     => $uv,
                 'latitud'       => $latitud,
                 'longitud'      => $longitud
                 ]);
